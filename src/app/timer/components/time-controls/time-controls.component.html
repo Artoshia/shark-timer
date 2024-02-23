@@ -1,0 +1,20 @@
+<button mat-button class="start-button" (click)="toggleClocks()">
+
+    <span *ngIf="timerActive && !(timerEnd$ | async) && !(timerStart$ | async)">Start</span>
+    <span *ngIf="timerActive && !(timerEnd$ | async) && (timerStart$ | async)">Stop</span>
+    <span *ngIf="timerActive && (timerEnd$ | async)">Ok</span>
+    <span *ngIf="!timerActive && !(stopwatchStart$ | async)">Start</span>
+    <span *ngIf="!timerActive && (stopwatchStart$ | async)">Stop</span>
+</button>
+<button mat-button class="reset-button" (click)="resetClocks()">Reset</button>
+<span class="flex-spacer"></span>
+<button id="timer-reset" mat-icon-button *ngIf="timerActive" (click)="toggleAlarmSound()">
+    <mat-icon *ngIf="(alarmEnabled$ | async)">volume_up</mat-icon>
+    <mat-icon *ngIf="!(alarmEnabled$ | async)">volume_off</mat-icon>
+</button>
+
+
+<audio #alarm loop="loop">
+    <source src="/assets/sounds/alarm.oga" type="audio/ogg">
+    <source src="/assets/sounds/alarm.mp3" type="audio/mp3">
+</audio>

@@ -1,0 +1,45 @@
+<div>
+    <div (click)="startSetTime()" *ngIf="!(settingTime$ | async)" id="time-display">
+        <ng-container *ngIf="hoursDigits">
+            <span class="act-hide time-display-digit time-display-hours" tabindex="0">{{hoursDigits}}</span>
+            <span class="act-hide time-display-sep">h</span>
+        </ng-container>
+        <ng-container *ngIf="minutesDigits">
+            <span class="time-display-digit time-display-minutes" tabindex="0">{{minutesDigits}}</span>
+            <span class="time-display-sep">m</span>
+        </ng-container>
+        <span class="time-display-digit time-display-seconds" tabindex="0">{{secondsDigits}}</span>
+        <span class="time-display-sep">s</span>
+        <ng-container *ngIf="showHundriths">
+            <span class="time-display-digit time-display-small-digit" tabindex="0">{{cSecondsDigits}}</span>
+        </ng-container>
+    </div>
+    <div *ngIf="(settingTime$ | async)" class="time-input-form" id="setting-display">
+        <div>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Hours" value="0" [(ngModel)]="inputHours"
+                    (input)="inputChange(inputHours, inputMinutes, inputSeconds)">
+            </mat-form-field>
+            <mat-card-content class="input-labels">Hours</mat-card-content>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Minutes" value="0" [(ngModel)]="inputMinutes"
+                    (input)="inputChange(inputHours, inputMinutes, inputSeconds)">
+            </mat-form-field>
+            <mat-card-content class="input-labels">Minutes</mat-card-content>
+        </div>
+        <div>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Seconds" value="0" [(ngModel)]="inputSeconds"
+                    (input)="inputChange(inputHours, inputMinutes, inputSeconds)">
+            </mat-form-field>
+            <mat-card-content class="input-labels">Seconds</mat-card-content>
+        </div>
+
+        <button mat-button (click)="endSetTime()">
+            Done
+        </button>
+    </div>
+</div>
