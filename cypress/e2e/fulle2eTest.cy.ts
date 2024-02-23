@@ -100,6 +100,15 @@ describe('Timer page working', () => {
     cy.get("#timer-reset > mat-icon").contains("volume_off").click({force: true})
   })
 
+  it('Able to finish timer', () => {
+    cy.visit('/')
+    ChangeTime(0,0,1)
+    cy.get(".start-button").click().contains("Stop")
+    cy.wait(2000)
+    cy.get(".time-display-digit").should("have.text", "00")
+    cy.get(".start-button").should("have.text", "Ok")
+  })
+
 
 })
 
